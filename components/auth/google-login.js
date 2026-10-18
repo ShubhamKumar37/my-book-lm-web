@@ -1,9 +1,8 @@
+
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-
 import { Button } from "@/components/ui/button";
-
 import {
   Card,
   CardContent,
@@ -11,14 +10,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-
 import { Globe } from "lucide-react";
 
 export function GoogleLogin() {
   const handleGoogleLogin = async () => {
     await authClient.signIn.social({
       provider: "google",
-      callbackURL: "http://localhost:3000/",
+      callbackURL: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
     });
   };
 
@@ -28,7 +26,6 @@ export function GoogleLogin() {
         <CardTitle className="text-2xl font-bold">
           Welcome
         </CardTitle>
-
         <CardDescription>
           Sign in to continue to your account
         </CardDescription>
