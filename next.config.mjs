@@ -1,8 +1,15 @@
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
   reactCompiler: true,
+
   async rewrites() {
+    // No proxy required during local development.
+    if (process.env.NODE_ENV === "development") {
+      return [];
+    }
+
+    // Production: proxy Better Auth requests through Vercel.
     return [
       {
         source: "/api/auth/:path*",
